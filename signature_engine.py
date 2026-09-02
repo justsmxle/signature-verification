@@ -1,4 +1,5 @@
 from __future__ import annotations
+from huggingface_hub import hf_hub_download
 
 import argparse
 import io
@@ -34,7 +35,7 @@ ImageInput = Union[str, Path, bytes, bytearray, Image.Image]
 
 
 class SignatureVerificationAPI:
-    def __init__(self, weights_path: str, threshold: float = 1.0) -> None:
+    def __init__(self, weights_path: str = None, threshold: float = 1.0) -> None:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.threshold = threshold
         self.model = SignatureEmbedder().to(self.device)
@@ -49,6 +50,11 @@ class SignatureVerificationAPI:
                 ),
             ]
         )
+        if weights_path is None:
+            weights_path = hf_hub_download(
+                repo_id="SMXLEEE/signature-verifier", 
+                filename="siamese_signature_best.pth"
+            )
 
         state_dict = self._extract_state_dict(Path(weights_path))
         self._load_model_weights(state_dict)
