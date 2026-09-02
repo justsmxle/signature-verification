@@ -22,7 +22,7 @@ Telegram-бот для автоматической верификации, ан
 
 1. **Клонирование репозитория**
 ```bash
-git clone [https://github.com/DonDon6666/signature-verification.git](https://github.com/DonDon6666/signature-verification.git)
+git clone [https://github.com/justsmxle/signature-verification.git](https://github.com/justsmxle/signature-verification.git)
 cd signature-verification
 pip install -r requirements.txt
 python telegram_signature_bot.py
